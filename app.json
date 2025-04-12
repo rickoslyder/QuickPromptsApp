@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "chatgpt-quick-prompts-mobile",
+    "name": "QuickPrompts",
     "slug": "chatgpt-quick-prompts-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,16 +13,27 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rkb.quickprompts",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.rkb.quickprompts"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": ["expo-secure-store"],
+    "extra": {
+      "eas": {
+        "projectId": "40a55fa8-0f6e-4c3c-859b-b49007e4bdfc"
+      }
     }
   }
 }

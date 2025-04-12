@@ -1,5 +1,5 @@
 {
-  "name": "chatgpt-quick-prompts-mobile",
+  "name": "quickprompts",
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
@@ -9,10 +9,24 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/vector-icons": "^14.0.2",
+    "@react-native-async-storage/async-storage": "^1.23.1",
+    "@react-navigation/native": "^7.1.6",
+    "@react-navigation/stack": "^7.2.10",
     "expo": "~52.0.43",
+    "expo-clipboard": "~7.0.1",
+    "expo-document-picker": "~13.0.3",
+    "expo-file-system": "~18.0.12",
+    "expo-font": "~13.0.2",
+    "expo-secure-store": "~14.0.1",
+    "expo-sharing": "~13.0.1",
+    "expo-splash-screen": "~0.27.2",
     "expo-status-bar": "~2.0.1",
     "react": "18.3.1",
-    "react-native": "0.76.9"
+    "react-native": "0.76.9",
+    "react-native-safe-area-context": "4.12.0",
+    "react-native-screens": "~4.4.0",
+    "expo-checkbox": "~4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
