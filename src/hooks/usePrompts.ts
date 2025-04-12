@@ -22,21 +22,26 @@ export const usePrompts = (): UsePromptsReturn => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchPrompts = useCallback(async () => {
+    console.log("[usePrompts Log] fetchPrompts() called");
     setIsLoading(true);
     setError(null);
     try {
+      console.log("[usePrompts Log] Fetching prompts from storage...");
       const loadedPrompts = await getPrompts();
+      console.log(`[usePrompts Log] Fetched ${loadedPrompts.length} prompts.`);
       setPrompts(loadedPrompts);
     } catch (err) {
-      console.error("Failed to fetch prompts:", err);
+      console.error("[usePrompts Log] Failed to fetch prompts:", err);
       setError(err instanceof Error ? err.message : "Failed to load prompts");
       setPrompts([]); // Set empty array on error
     } finally {
+      console.log("[usePrompts Log] fetchPrompts() finished");
       setIsLoading(false);
     }
   }, []);
 
   useEffect(() => {
+    console.log("[usePrompts Log] useEffect calling fetchPrompts");
     fetchPrompts();
   }, [fetchPrompts]);
 

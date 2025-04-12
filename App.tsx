@@ -15,20 +15,23 @@ export default function App() {
 
     useEffect(() => {
         async function prepare() {
+            console.log('[App Log] prepare() called');
             try {
-                // Pre-load fonts, make any API calls you need to do here
+                console.log('[App Log] Pre-loading fonts...');
                 await Font.loadAsync({
                     ...MaterialCommunityIcons.font, // Load the specific font
                 });
+                console.log('[App Log] Fonts pre-loaded successfully.');
 
-                // Initialize storage (Commented out for previous debugging, uncomment if needed)
+                // Initialize storage (Still commented out)
+                // console.log('[App Log] Initializing storage...');
                 // await initializeStorage();
+                // console.log('[App Log] Storage initialized.');
 
-                // Artificially delay for two seconds to simulate a slow load
-                // await new Promise(resolve => setTimeout(resolve, 2000));
             } catch (e) {
-                console.warn(e); // Log errors
+                console.error('[App Log] Error during prepare():', e); // Log specific errors
             } finally {
+                console.log('[App Log] Setting appIsReady = true');
                 // Tell the application to render
                 setAppIsReady(true);
             }

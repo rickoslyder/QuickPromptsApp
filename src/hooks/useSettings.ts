@@ -24,27 +24,36 @@ export const useSettings = (): UseSettingsReturn => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchSettings = useCallback(async () => {
+    console.log("[useSettings Log] fetchSettings() called");
     setIsLoading(true);
     setError(null);
     try {
+      console.log("[useSettings Log] Fetching settings and API key...");
       const [loadedSettings, loadedApiKey] = await Promise.all([
         getUserSettings(), // Fetches non-sensitive settings from AsyncStorage
         getApiKey(), // Fetches API key from SecureStore
       ]);
+      console.log("[useSettings Log] Settings fetched:", loadedSettings);
+      console.log(
+        "[useSettings Log] API key fetched:",
+        loadedApiKey ? "Exists" : "Null"
+      );
       setSettings(loadedSettings);
       setApiKey(loadedApiKey);
     } catch (err) {
-      console.error("Failed to fetch settings:", err);
+      console.error("[useSettings Log] Failed to fetch settings:", err);
       setError(err instanceof Error ? err.message : "Failed to load settings");
       // Set defaults on error to ensure app doesn't crash
       setSettings({});
       setApiKey(null);
     } finally {
+      console.log("[useSettings Log] fetchSettings() finished");
       setIsLoading(false);
     }
   }, []);
 
   useEffect(() => {
+    console.log("[useSettings Log] useEffect calling fetchSettings");
     fetchSettings();
   }, [fetchSettings]);
 
