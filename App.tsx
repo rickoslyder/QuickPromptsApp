@@ -25,7 +25,7 @@ export default function App() {
 
                 // Initialize storage (Still commented out)
                 // console.log('[App Log] Initializing storage...');
-                // await initializeStorage();
+                await initializeStorage();
                 // console.log('[App Log] Storage initialized.');
 
             } catch (e) {
