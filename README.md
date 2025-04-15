@@ -1,4 +1,4 @@
-# ChatGPT Quick Prompts Mobile
+# QuickPrompts
 
 A mobile application (iOS & Android) for managing and using predefined prompt templates with AI services like ChatGPT. Built with React Native and Expo.
 
@@ -27,7 +27,7 @@ A mobile application (iOS & Android) for managing and using predefined prompt te
 ## Project Structure
 
 ```
-chatgpt-quick-prompts-mobile/
+QuickPrompts/
 ├── assets/              # Static assets (icon, splash screen, fonts)
 ├── src/
 │   ├── components/      # Reusable UI components (Button, PromptForm, PromptListItem, etc.)
@@ -56,7 +56,7 @@ chatgpt-quick-prompts-mobile/
 2.  **Clone the repository:**
     ```bash
     git clone <repository-url>
-    cd chatgpt-quick-prompts-mobile
+    cd QuickPrompts
     ```
 
 3.  **Install dependencies:**

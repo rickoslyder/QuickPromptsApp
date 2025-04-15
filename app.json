@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "QuickPrompts",
-    "slug": "chatgpt-quick-prompts-mobile",
+    "slug": "QuickPrompts",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
