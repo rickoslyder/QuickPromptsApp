@@ -8,14 +8,14 @@ import {
     Alert,
 } from 'react-native';
 import { AICategorizationScreenProps } from '../navigation/types';
-import { useSettings } from '../hooks/useSettings';
+import { useSettings } from '../context/SettingsContext';
 import { usePrompts } from '../hooks/usePrompts';
 import ScreenContainer from '../components/ScreenContainer';
 import Button from '../components/Button';
 import CategorySuggestionItem from '../components/CategorySuggestionItem';
 import { getCategorySuggestions } from '../utils/openaiApi';
 import { Prompt } from '../types';
-import { Colors } from '../utils/constants';
+import { Colors, DEFAULT_MODEL_ID } from '../utils/constants';
 
 // Interface combining prompt with suggestion state
 interface PromptWithSuggestion extends Prompt {
@@ -24,7 +24,11 @@ interface PromptWithSuggestion extends Prompt {
 }
 
 const AICategorizationScreen: React.FC<AICategorizationScreenProps> = ({ navigation }) => {
-    const { apiKey, isLoading: settingsLoading } = useSettings();
+    const {
+        apiKey,
+        selectedModelId,
+        isLoading: settingsLoading
+    } = useSettings();
     const { prompts, updatePrompt, isLoading: promptsLoading } = usePrompts();
 
     const [suggestions, setSuggestions] = useState<PromptWithSuggestion[]>([]);
@@ -52,7 +56,9 @@ const AICategorizationScreen: React.FC<AICategorizationScreenProps> = ({ navigat
         setIsFetching(true);
         setFetchError(null);
         try {
-            const result = await getCategorySuggestions(apiKey, prompts);
+            const modelToUse = selectedModelId || DEFAULT_MODEL_ID;
+            console.log(`Fetching suggestions using model: ${modelToUse}`);
+            const result = await getCategorySuggestions(apiKey, prompts, modelToUse);
             if (result.success && result.suggestions) {
                 // Map suggestions back to the local state
                 setSuggestions(currentSuggestions =>
@@ -76,7 +82,7 @@ const AICategorizationScreen: React.FC<AICategorizationScreenProps> = ({ navigat
         } finally {
             setIsFetching(false);
         }
-    }, [apiKey, prompts, navigation]);
+    }, [apiKey, prompts, navigation, selectedModelId]);
 
     const handleToggleSelection = useCallback((id: string) => {
         setSuggestions(currentSuggestions =>

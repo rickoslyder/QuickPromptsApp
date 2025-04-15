@@ -11,7 +11,7 @@ export const Colors = {
   error: "#EF4444", // Red
   success: "#10B981", // Green
   border: "#D1D5DB", // Light Gray Border
-  disabled: "#9CA3AF", // Gray for disabled state text
+  disabled: "#DDDDDD",
   disabledBackground: "#E5E7EB", // Gray for disabled state background
 };
 
@@ -58,3 +58,6 @@ export const availableIcons = [
   "book-open-page-variant-outline", // For writing/docs
   "database-outline", // For data prompts
 ];
+
+// Add the new constant
+export const DEFAULT_MODEL_ID = "gpt-4.1-nano"; // Using a newer default

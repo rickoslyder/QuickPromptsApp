@@ -7,6 +7,7 @@ import {
     ActivityIndicator,
     Alert,
 } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { PromptListScreenProps } from '../navigation/types';
 import { usePrompts } from '../hooks/usePrompts';
 import PromptListItem from '../components/PromptListItem';
@@ -24,6 +25,17 @@ const PromptListScreen: React.FC<PromptListScreenProps> = ({ navigation }) => {
         deletePrompt,
         reorderPrompt
     } = usePrompts();
+
+    useFocusEffect(
+        useCallback(() => {
+            console.log("PromptListScreen focused, fetching prompts...");
+            fetchPrompts();
+
+            return () => {
+                // console.log("PromptListScreen blurred");
+            };
+        }, [fetchPrompts])
+    );
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -132,7 +144,13 @@ const PromptListScreen: React.FC<PromptListScreenProps> = ({ navigation }) => {
                     renderItem={renderItem}
                     keyExtractor={(item) => item.id}
                     contentContainerStyle={styles.listContent}
+                    extraData={prompts}
                 />
+            )}
+            {isLoading && prompts.length > 0 && (
+                <View style={styles.loadingMoreIndicator}>
+                    <ActivityIndicator size="small" color={Colors.textSecondary} />
+                </View>
             )}
         </ScreenContainer>
     );
@@ -143,6 +161,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        padding: 20,
     },
     errorText: {
         color: Colors.error,
@@ -172,6 +191,10 @@ const styles = StyleSheet.create({
         paddingVertical: 0,
         backgroundColor: 'transparent',
         borderWidth: 0,
+    },
+    loadingMoreIndicator: {
+        paddingVertical: 10,
+        alignItems: 'center',
     },
 });
 
