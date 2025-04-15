@@ -21,7 +21,7 @@ const AppNavigator: React.FC = () => {
                 <Stack.Screen
                     name="PromptList"
                     component={PromptListScreen}
-                    options={{ title: 'Quick Prompts' }}
+                    options={{ title: 'QuickPrompts' }}
                 />
                 <Stack.Screen
                     name="PromptEdit"
