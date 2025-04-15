@@ -34,3 +34,6 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# misc
+quickprompts-456520-78e62fd8feb4.json
