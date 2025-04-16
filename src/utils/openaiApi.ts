@@ -131,7 +131,7 @@ export const getCategorySuggestions = async (
   }
 
   try {
-    const response = await fetch(OPENAI_API_URL, {
+    const response = await fetch(`${OPENAI_API_URL}/chat/completions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -142,22 +142,27 @@ export const getCategorySuggestions = async (
         messages: [
           {
             role: "system",
-            content: `You are a helpful assistant that categorizes prompts.
-            Please analyze the provided prompts (given as a JSON array of objects with id and text) and suggest a concise, relevant category (1-3 words max) for each one.
-            Return your response ONLY as a valid JSON object in the following format, ensuring no extra text or markdown formatting:
-            {
-              "suggestions": [
-                {
-                  "promptId": "id_from_input_prompt1",
-                  "category": "Suggested Category 1"
-                },
-                {
-                  "promptId": "id_from_input_prompt2",
-                  "category": "Suggested Category 2"
-                }
-              ]
-            }
-            Your response MUST be valid JSON. Only include prompts that were provided in the input. Use the exact promptId from the input.`, // Updated system prompt for clarity
+            content: `You are an AI assistant specializing in prompt categorization for organizational purposes.
+Your task is to analyze the provided list of prompts (JSON array of objects with 'id' and 'text') and assign a **concise and relevant category** to each.
+The category should ideally be a **noun or short noun phrase (1-3 words max)** that accurately reflects the prompt's core purpose or topic.
+Examples of good categories: "Code Generation", "Creative Writing", "Email Drafting", "Data Analysis", "Meeting Summary".
+
+Return your response **strictly** as a valid JSON object using the following exact structure. Do **not** include any introductory text, explanations, markdown formatting, or prefixes like "Category:".
+
+{
+  "suggestions": [
+    {
+      "promptId": "the_exact_id_from_input1",
+      "category": "The Concise Category 1"
+    },
+    {
+      "promptId": "the_exact_id_from_input2",
+      "category": "The Concise Category 2"
+    }
+    // ... include an object for EACH prompt provided in the input, using its original promptId
+  ]
+}
+Ensure every prompt from the input list has a corresponding entry in the output JSON.`,
           },
           {
             role: "user",
